@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping list example</title>
+    <style>
+      li {
+        margin-bottom: 10px;
+      }
+
+      li button {
+        font-size: 12px;
+        margin-left: 20px;
+        color: #666;
+      }
+    </style>
+  </head>
+  <body>
+
+    <h1>My shopping list</h1>
+
+    <div>
+      <label for="item">Enter a new item:</label>
+      <input type="text" name="item" id="item">
+      <button id="add-item-button">Add item</button>
+    </div>
+
+    <ul id="shopping-list">
+      <!-- List items will appear here -->
+    </ul>
+
+    <script>
+      // Step 1: Create references to the elements
+      const list = document.getElementById('shopping-list');
+      const input = document.getElementById('item');
+      const addButton = document.getElementById('add-item-button');
+
+      // Step 2: Function to handle the "Add item" button click
+      addButton.addEventListener('click', function() {
+        // Step 3: Get the value from the input
+        const inputValue = input.value;
+
+        // Step 4: Clear the input field
+        input.value = '';
+
+        // Prevent adding empty items
+        if (!inputValue.trim()) {
+          return;
+        }
+
+        // Step 5: Create new elements for the list item
+        const listItem = document.createElement('li');
+        const itemText = document.createElement('span');
+        const deleteButton = document.createElement('button');
+
+        // Step 6: Set content of new elements
+        itemText.textContent = inputValue;
+        deleteButton.textContent = 'Delete';
+
+        // Step 7: Append the span and button to the list item
+        listItem.appendChild(itemText);
+        listItem.appendChild(deleteButton);
+
+        // Step 8: Append the new list item to the shopping list
+        list.appendChild(listItem);
+
+        // Step 9: Add a delete functionality to the button
+        deleteButton.addEventListener('click', function() {
+          list.removeChild(listItem);
+        });
+
+        // Step 10: Focus the input element for the next entry
+        input.focus();
+      });
+    </script>
+  </body>
+</html>
